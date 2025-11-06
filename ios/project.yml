@@ -1,0 +1,30 @@
+name: StudyPlanner
+options:
+  bundleIdPrefix: com.example
+  deploymentTarget:
+    iOS: 16.0
+settings:
+  base:
+    PRODUCT_BUNDLE_IDENTIFIER: com.example.studyplanner
+    DEVELOPMENT_TEAM: ABCDE12345
+    CODE_SIGN_STYLE: Automatic
+    SWIFT_VERSION: 5.9
+    INFOPLIST_FILE: StudyPlanner/Info.plist
+    ENABLE_ON_DEMAND_RESOURCES: YES
+packages: {}
+targets:
+  StudyPlanner:
+    type: application
+    platform: iOS
+    sources:
+      - path: StudyPlanner
+    settings:
+      base:
+        PRODUCT_NAME: StudyPlanner
+        PRODUCT_BUNDLE_IDENTIFIER: com.example.studyplanner
+        DEVELOPMENT_TEAM: ABCDE12345
+        CODE_SIGN_STYLE: Automatic
+        SWIFT_VERSION: 5.9
+        INFOPLIST_FILE: StudyPlanner/Info.plist
+        CODE_SIGN_ENTITLEMENTS: StudyPlanner/StudyPlanner.entitlements
+        ENABLE_ON_DEMAND_RESOURCES: YES

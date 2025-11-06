@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+  <key>CFBundleDisplayName</key>
+  <string>StudyPlanner</string>
+  <key>CFBundleIdentifier</key>
+  <string></string>
+  <key>CFBundleName</key>
+  <string>StudyPlanner</string>
+  <key>CFBundleShortVersionString</key>
+  <string>0.1.0</string>
+  <key>CFBundleVersion</key>
+  <string>1</string>
+  <key>UIApplicationSceneManifest</key>
+  <dict>
+    <key>UIApplicationSupportsMultipleScenes</key>
+    <false/>
+  </dict>
+  <key>LSRequiresIPhoneOS</key>
+  <true/>
+  <key>NSCalendarsUsageDescription</key>
+  <string>用于创建与管理学习计划日程。</string>
+  <key>NSCalendarsWriteOnlyAccess</key>
+  <true/>
+  <key>NSFaceIDUsageDescription</key>
+  <string>用于保护您的隐私内容。</string>
+  <key>UIApplicationSupportsIndirectInputEvents</key>
+  <true/>
+  <key>UILaunchScreen</key>
+  <dict/>
+  <!-- BGTask 标识（可替换） -->
+  <key>BGTaskSchedulerPermittedIdentifiers</key>
+  <array>
+    <string>com.example.studyplanner.refresh</string>
+  </array>
+  <key>UIApplicationSupportsIndirectInputEvents</key>
+  <!-- 可替换占位：iCloud 容器 ID 与是否启用 CloudKit 同步 -->
+  <key>StudyPlannerICloudContainerId</key>
+  <string>iCloud.com.example.studyplanner</string>
+  <key>StudyPlannerEnableCloudKit</key>
+  <true/>
+  <!-- 可替换占位：ODR 标签（Qwen 模型资源）与社区 API 基址 -->
+  <key>StudyPlannerModelODRTag</key>
+  <string>qwen18b</string>
+  <!-- 可替换占位：ODR 资源中 Core ML 模型目录/文件名前缀（例如 Qwen18B.mlmodelc） -->
+  <key>StudyPlannerModelResourceName</key>
+  <string>Qwen18B</string>
+  <key>StudyPlannerCommunityAPIBaseURL</key>
+  <string>https://api.example.com</string>
+</dict>
+</plist>
