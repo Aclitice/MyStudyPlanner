@@ -22,16 +22,17 @@ final class DataService: ObservableObject {
     }
 
     func addTasksForGoal(goalId: UUID, tasks: [TaskPlan]) throws {
-        for t in tasks {
+        for (index, t) in tasks.enumerated() {
             let task = NSEntityDescription.insertNewObject(forEntityName: "Task", into: context)
             task.setValue(UUID(), forKey: "id")
             task.setValue(t.title, forKey: "title")
             task.setValue(t.estimatedMinutes, forKey: "estimatedMinutes")
-            task.setValue(1, forKey: "difficulty")
+            task.setValue(Int16(t.difficulty ?? 2), forKey: "difficulty") // Use AI-provided difficulty
             task.setValue("todo", forKey: "status")
             task.setValue(t.type, forKey: "type")
             task.setValue(nil, forKey: "dueDate")
             task.setValue(goalId, forKey: "goalId")
+            task.setValue(Int32(index), forKey: "order")
         }
         try context.save()
     }

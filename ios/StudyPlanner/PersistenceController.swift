@@ -100,8 +100,24 @@ final class PersistenceController {
             attribute(name: "locked", type: .booleanAttributeType, isOptional: false, defaultValue: false),
             attribute(name: "eventIdentifier", type: .stringAttributeType, isOptional: true)
         ]
+        
+        // StudyStats (NEW)
+        let studyStats = NSEntityDescription()
+        studyStats.name = "StudyStats"
+        studyStats.managedObjectClassName = "NSManagedObject"
+        studyStats.properties = [
+            attribute(name: "id", type: .UUIDAttributeType, isOptional: false, defaultValue: UUID()),
+            attribute(name: "date", type: .dateAttributeType, isOptional: false, defaultValue: Date()),
+            attribute(name: "taskId", type: .UUIDAttributeType, isOptional: true),
+            attribute(name: "goalId", type: .UUIDAttributeType, isOptional: true),
+            attribute(name: "plannedMinutes", type: .integer32AttributeType, isOptional: false, defaultValue: 0),
+            attribute(name: "actualMinutes", type: .integer32AttributeType, isOptional: false, defaultValue: 0),
+            attribute(name: "completionStatus", type: .stringAttributeType, isOptional: false, defaultValue: "completed"),
+            attribute(name: "focusScore", type: .doubleAttributeType, isOptional: true), // 0.0-1.0
+            attribute(name: "notes", type: .stringAttributeType, isOptional: true)
+        ]
 
-        model.entities = [userProfile, goal, task, block]
+        model.entities = [userProfile, goal, task, block, studyStats]
         return model
     }
 

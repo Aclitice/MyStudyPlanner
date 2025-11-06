@@ -12,6 +12,10 @@ struct ContentView: View {
                         .tabItem { Label("主页", systemImage: "house") }
                     PlannerView()
                         .tabItem { Label("计划", systemImage: "calendar") }
+                    StatsView()
+                        .tabItem { Label("统计", systemImage: "chart.bar.fill") }
+                    CommunityView()
+                        .tabItem { Label("社区", systemImage: "person.3.fill") }
                     SettingsView()
                         .tabItem { Label("设置", systemImage: "gear") }
                 }

@@ -5,16 +5,25 @@ struct HomeView: View {
     @Environment(\.managedObjectContext) private var context
     @FetchRequest(entity: NSEntityDescription.entity(forEntityName: "Task", in: PersistenceController.shared.container.viewContext)!, sortDescriptors: [NSSortDescriptor(key: "order", ascending: true)]) private var tasks: FetchedResults<NSManagedObject>
     @State private var showNewGoal: Bool = false
+    @State private var todayStats: (minutes: Int, tasks: Int)?
     @EnvironmentObject var appState: AppState
 
     var body: some View {
         NavigationView {
             List {
                 header
+                if let stats = todayStats {
+                    todayStatsSection(stats: stats)
+                }
                 taskSection
             }
             .navigationTitle("Study Planner")
             .toolbar {
+                ToolbarItem(placement: .navigationBarLeading) {
+                    NavigationLink(destination: GoalsListView()) {
+                        Image(systemName: "flag.fill")
+                    }
+                }
                 ToolbarItem(placement: .navigationBarTrailing) {
                     EditButton()
                 }
@@ -23,6 +32,9 @@ struct HomeView: View {
                 }
             }
             .sheet(isPresented: $showNewGoal) { NewGoalView() }
+            .onAppear {
+                loadTodayStats()
+            }
         }
     }
 
@@ -106,6 +118,46 @@ struct HomeView: View {
             obj.setValue(Int32(index), forKey: "order")
         }
         do { try context.save() } catch { print("reorder save error: \(error)") }
+    }
+    
+    private func todayStatsSection(stats: (minutes: Int, tasks: Int)) -> some View {
+        Section(header: Text("Today's Progress")) {
+            HStack {
+                VStack(alignment: .leading) {
+                    Text("\(stats.minutes) min")
+                        .font(.title2)
+                        .fontWeight(.bold)
+                    Text("Study Time")
+                        .font(.caption)
+                        .foregroundColor(.secondary)
+                }
+                
+                Spacer()
+                
+                VStack(alignment: .trailing) {
+                    Text("\(stats.tasks)")
+                        .font(.title2)
+                        .fontWeight(.bold)
+                    Text("Tasks Done")
+                        .font(.caption)
+                        .foregroundColor(.secondary)
+                }
+            }
+            .padding(.vertical, 4)
+        }
+    }
+    
+    private func loadTodayStats() {
+        Task {
+            do {
+                let stats = try await AnalyticsService.shared.getTodayStats(context: context)
+                await MainActor.run {
+                    self.todayStats = stats
+                }
+            } catch {
+                print("Failed to load today stats: \(error)")
+            }
+        }
     }
 }
 
